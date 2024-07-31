@@ -26,25 +26,45 @@
     </form> --}}
 
     <!-- Right navbar links -->
+  
     <ul class="navbar-nav mr-auto-navbav">
         <!-- Messages Dropdown Menu -->
-        {{-- <li class="nav-item dropdown">
+        {{-- <ul  >
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <li class="nav-item dropdown" >
+                    <a class="nav-link" data-toggle="dropdown" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                        {{ $properties['native'] }}
+                    </a>
+                </li>
+            @endforeach
+        </ul> --}}
+
+        <!-- Example single danger button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ trans('home.lang') }}
+            </button>
+            <div class="dropdown-menu">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                   
+                    <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                        {{ $properties['native'] }}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                @endforeach
+            
+            </div>
+        </div>
+        <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                    <div>
-                        {{ Auth::user()->name}}
-                    </div>
-                </button>
+               
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <x-slot name="content">
-                    <x-dropdown-link :href="route('admin.profile.edit')">
-                        {{ __('Profile') }}
-                    </x-dropdown-link>
+                
 
 
             </div>
-        </li> --}}
+        </li>
  <!-- Messages Dropdown Menu -->
  <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#">

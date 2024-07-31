@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('address');
 
-            $table->integer('schoolId')->unsigned();
+            $table->unsignedBigInteger('school_id');
 
-            // $table->foreignId('schoolId')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
