@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('comment');
-            $table->integer('studentId')->unsigned();
-            $table->integer('teacherId')->unsigned();
-            $table->integer('contentId')->unsigned();
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('content_id');
 
 
-            // $table->foreignId('studentId')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreignId('teacherId')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreignId('contentId')->references('id')->on('contents')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->id();
             $table->json('title');
             $table->json('type');
 
-            $table->integer('categoryId')->unsigned();
-            $table->integer('teacherId')->unsigned();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('teacher_id');
 
-            // $table->foreignId('categoryId')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreignId('teacherId')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
