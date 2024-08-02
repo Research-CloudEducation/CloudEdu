@@ -11307,12 +11307,13 @@ body,
 
 .user-panel img {
   height: auto;
-  width: 2.1rem;
+  width: 3.1rem;
 }
 
 .user-panel .info {
   display: inline-block;
   padding: 5px 5px 5px 10px;
+  font-size: 20px;
 }
 
 .user-panel .status,
