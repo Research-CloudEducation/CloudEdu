@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SchoolController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -23,18 +24,7 @@ Route::get('/', function () {
 
 // routes/web.php
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function()
-{
-	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
-	Route::get('/', function()
-	{
-		return View::make('hello');
-	});
 
-	Route::get('test',function(){
-		return View::make('test');
-	});
-});
 
 Route::group(
     [
@@ -47,6 +37,10 @@ Route::group(
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+            // manage schools routes
+            Route::resource('schools', SchoolController::class);
         });
 
     });

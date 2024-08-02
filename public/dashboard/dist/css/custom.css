@@ -7,6 +7,7 @@
 .brand-image {
     float: right;
 }
+
 .content-wrapper, .main-footer, .main-header {
     margin-left: 0px;
     margin-right: 250px;
@@ -61,4 +62,8 @@
     .sidebar-open .main-sidebar, .sidebar-open .main-sidebar::before {
         margin-right: 0;
     }
+}
+
+.main-side2 .link:hover {
+    color: rgb(19, 20, 19);
 }

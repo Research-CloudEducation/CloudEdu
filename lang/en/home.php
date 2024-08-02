@@ -3,6 +3,7 @@
 return [
 
     'lang' => 'Language',
+    'dashboard' => 'Dashboard',
 
 
 
