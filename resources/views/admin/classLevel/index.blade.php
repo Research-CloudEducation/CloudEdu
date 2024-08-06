@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title', 'المدارس | Dashboard')
-
+@section('page_sub_title' , 'Class Level')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="#">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Link 1</a></li>
@@ -21,7 +21,7 @@
                 @endif
                   <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">DataTable with default features</h3>
+                        <h3 class="card-title">{{ __('قائمــة الفصول الدراســية') }}</h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
@@ -30,23 +30,21 @@
                           <tr>
                             <th>{{ trans('table.name') }}</th>
                             <th>{{ trans('table.description') }}</th>
-                            <th>{{ trans('table.address') }}</th>
                             <th>{{ trans('form.control') }}</th>
                             {{-- <th>CSS grade</th> --}}
                           </tr>
                           </thead>
                           <tbody>
 
-                              @foreach ($schools as $school)
+                              @foreach ($classes as $class)
                                 <tr>
-                                      <td> {{ $school->name }} </td>
-                                      <td> {{ $school->description }} {{ __('test') }} </td>
-                                      <td> {{ $school->address }} </td>
+                                      <td> {{ $class->name }} </td>
+                                      <td> {{ $class->description }}  </td>
                                       <td>
-                                        <a class="btn btn-info" href="{{ route('admin.schools.edit' , $school->id) }}">
+                                        <a class="btn btn-info" href="{{ route('admin.class-level.edit' , $class->id) }}">
                                           <i class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-danger" href="{{ route('admin.schools.destroy' , $school->id) }}">
+                                        <a class="btn btn-danger" href="{{ route('admin.class-level.destroy' , $class->id) }}">
                                           <i class="fa fa-trash"></i>
                                         </a>
                                       
@@ -60,7 +58,6 @@
                           <tr>
                             <th>Rendering engine</th>
                             <th>Browser</th>
-                            <th>Platform(s)</th>
                             <th>Engine version</th>
                             {{-- <th>CSS grade</th> --}}
                           </tr>

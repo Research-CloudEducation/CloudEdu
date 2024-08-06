@@ -20,18 +20,18 @@
         @method('patch')
 
         <div>
-            <x-input-label for="ar_name" :value="__('ar_Name')" />
+            <x-input-label for="ar_name" :value="trans('form.name_ar')" />
             <x-text-input id="name" name="ar_name" type="text" class="mt-1 block w-full" :value="old('ar_name', $user->attrByLocale('ar' , 'name')  )" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('ar_name')" />
         </div>
 
         <div>
-            <x-input-label for="en_name" :value="__('en_Name')" />
+            <x-input-label for="name_en" :value="trans('form.name_en')" />
             <x-text-input id="name" name="en_name" type="text" class="mt-1 block w-full" :value="old('en_name',   $user->attrByLocale('en' , 'name') )" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('en_name')" />
         </div>
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="trans('form.email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
