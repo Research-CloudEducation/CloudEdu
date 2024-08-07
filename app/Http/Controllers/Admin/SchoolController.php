@@ -4,90 +4,133 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use App\Http\Requests\School\RequestUpdate;
 use App\Http\Requests\School\SchoolRequest;
 
 class SchoolController extends Controller
 {
     /**
-     * Show the form for creating the resource.
+     * Display a listing of the resource.
      */
-
     public function index()
     {
-        if(!auth()->check() || !auth()->user()->is_admin)
-        {
-            abort(404);
-        }
-
-        return view('admin.schools.index');
+        // this will take you  to default page of school contain info about it 
+        $schools = School::all();
+        return view('admin.schools.index' , compact('schools'));
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        // abort(404);
-
+        // this return page can create new school and store in database 
         return view('admin.schools.create');
     }
 
     /**
-     * Store the newly created resource in storage.
+     * Store a newly created resource in storage.
      */
     public function store(SchoolRequest $request)
     {
-        // $request->user()->fill($request->validated());
+   
+        DB::beginTransaction();
+        try {
+            $store   =  School::create([
+                'name' => json_encode([
+                    'ar' => $request->name_ar,
+                    'en' => $request->name_en,
+                ]),
+                'description' => json_encode([
+                    'ar' => $request->description_ar,
+                    'en' => $request->description_en,
+                ]),
+                'address' => $request->address
+            ]);
         
-        dd($request->all());
-        // $request->school()->fill($request->validated());
+        DB::commit();        
+             return redirect()->route('admin.schools.index')->with('success', 'create school successfully');
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return back()->with('error', 'there\'s something went wrong');
 
-        $request->school->name = json_encode([
-            'ar' => $request->name_ar,
-            'en' => $request->name_en
-        ]);
-
-        $request->school->description = json_encode([
-            'ar' => $request->description_ar,
-            'en' => $request->description_en
-        ]);
-
-        $request->school->address = $request->address;
-
-        $request->school->save();
-
-          Redirect::route('admin.schools.create')->with('status' , 'school-created');
-
-        abort(404);
+        }
+       
+        return 'this test just not stored yet';
     }
 
     /**
-     * Display the resource.
+     * Display the specified resource.
      */
-    public function show()
+    public function show(School $school)
     {
         //
     }
 
     /**
-     * Show the form for editing the resource.
+     * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(School $school)
     {
-        //
+        // $school = School::find($school);
+        return view('admin.schools.edit' , compact('school'));
     }
 
     /**
-     * Update the resource in storage.
+     * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(RequestUpdate $request, $school)
     {
-        //
+        // here to edit specific row in school table 
+        $school = School::find($school);
+
+        DB::beginTransaction();
+        try {
+            $school->update([
+                'name' => json_encode([
+                    'ar' => $request->name_ar,
+                    'en' => $request->name_en,
+                ]),
+                'description' => json_encode([
+                    'ar' => $request->description_ar,
+                    'en' => $request->description_en,
+                ]),
+                'address' => $request->address
+            ]);
+    
+            DB::commit();
+
+            return redirect()->route('admin.schools.index')->with('success' , 'successfully update');
+
+        } catch (\Exception $th) {
+            //throw this catch if fail return back;
+            DB::rollBack();
+
+            return back()->with('error' , 'Sorry not Done yet');
+        }
+
+        
     }
 
     /**
-     * Remove the resource from storage.
+     * Remove the specified resource from storage.
      */
-    public function destroy(): never
+    public function destroy($school)
     {
-        abort(404);
+        if (School::find($school)) {
+            School::find($school)->delete();
+
+            return back()->with('success' , 'school has been deleted successfully');
+        }else {
+            return 'not item to delete .... ';
+        }
+        // here can put temp delete function 
+
+
     }
 }

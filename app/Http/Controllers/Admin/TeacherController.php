@@ -2,56 +2,109 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\School;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Teacher\TeacherCreateRequest;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
     /**
-     * Show the form for creating the resource.
+     * Display a listing of the resource.
      */
-    public function create(): never
+    public function index()
     {
-        abort(404);
+        //
+        $teachers = Teacher::all();
+        return view('admin.teachers.index' , compact('teachers'));
     }
 
     /**
-     * Store the newly created resource in storage.
+     * Show the form for creating a new resource.
      */
-    public function store(Request $request): never
+    public function create()
     {
-        abort(404);
+        //
+        $schools = School::all();
+        return view('admin.teachers.create' , compact('schools'));
     }
 
     /**
-     * Display the resource.
+     * Store a newly created resource in storage.
      */
-    public function show()
+    public function store(TeacherCreateRequest $request)
+    {
+        // dd($request->all());
+        // store data of teacher in database 
+        DB::beginTransaction();
+
+        try {
+            Teacher::create([
+                'name' => json_encode([
+                    'ar' => $request->name_ar,
+                    'en' => $request->name_en,
+                ]),
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'school_id' => $request->school_id
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.teachers.index')->with('success' , 'Added Successfully');
+
+        } catch (\Throwable $th) {
+            //throw $th; if fail then do this 
+            DB::rollBack();
+
+            return back()->with('error' , 'Fail to add , Something went wrong');
+        }
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Teacher $teacher)
     {
         //
     }
 
     /**
-     * Show the form for editing the resource.
+     * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(Teacher $teacher)
+    {
+        // get 
+        $schools = School::all();
+        return view('admin.teachers.edit' , compact('teacher' , 'schools'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Teacher $teacher)
     {
         //
     }
 
     /**
-     * Update the resource in storage.
+     * Remove the specified resource from storage.
      */
-    public function update(Request $request)
+    public function destroy($teacher)
     {
-        //
-    }
+        // 
+        if (Teacher::find($teacher)) {
+            Teacher::find($teacher)->delete();
 
-    /**
-     * Remove the resource from storage.
-     */
-    public function destroy(): never
-    {
-        abort(404);
+            return back()->with('success' , 'school has been deleted successfully');
+        }else {
+            return 'not item to delete .... ';
+        }
+        // here can put temp delete function 
     }
 }

@@ -8,4 +8,32 @@ use Illuminate\Database\Eloquent\Model;
 class ClassLevel extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+    public function attrByLocale($locale = 'ar' , $attr = 'name')
+    {
+        $arr = json_decode($this->getRawOriginal($attr) , true);
+        return $arr[$locale];
+    }
+    
+    public function getNameAttribute($value)
+    {
+        $arr = json_decode($value , true);
+        if (app()->isLocale('ar')) {
+            return $arr['ar'];
+        }else{
+            return $arr['en'];
+        }
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        $arr = json_decode($value ,true);
+        if (app()->isLocale('ar')) {
+            return $arr['ar'];
+        }else{
+            return $arr['en'];
+        }
+    }
+
 }

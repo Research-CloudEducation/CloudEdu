@@ -1,6 +1,9 @@
 <?php 
 
 return [
+    'name' => 'Name',
+    'description' => 'Description',
+    'address' => 'Address',
     'name_ar' => 'Name In Arabic',
     'name_en' => 'Name In English',
     'desc_ar' => 'Description In Arabic',
@@ -14,10 +17,9 @@ return [
     'edit'   => 'Edit',
     'update'  => 'Update',
     'delete'  => 'Delete',
-    'control'  => 'Control'
-
-    
-
+    'control'  => 'Control',
+    'school'  => 'School'
 ];
+
 
 ?>

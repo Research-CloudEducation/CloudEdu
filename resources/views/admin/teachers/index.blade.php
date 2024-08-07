@@ -21,7 +21,7 @@
                 @endif
                   <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">DataTable with default features</h3>
+                        <h3 class="card-title "> {{ trans('sidebar.teacherM') }} </h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
@@ -29,7 +29,9 @@
                           <thead>
                           <tr>
                             <th>{{ trans('table.name') }}</th>
-                            <th>{{ trans('table.description') }}</th>
+                            <th>{{ trans('table.email') }}</th>
+                            <th>{{ trans('table.phone') }}</th>
+                            <th>{{ trans('table.school') }}</th>
                             <th>{{ trans('table.address') }}</th>
                             <th>{{ trans('form.control') }}</th>
                             {{-- <th>CSS grade</th> --}}
@@ -37,19 +39,20 @@
                           </thead>
                           <tbody>
 
-                              @foreach ($schools as $school)
+                              @foreach ($teachers as $teacher)
                                 <tr>
-                                      <td> {{ $school->name }} </td>
-                                      <td> {{ $school->description }} {{ __('test') }} </td>
-                                      <td> {{ $school->address }} </td>
+                                      <td> {{ $teacher->name }} </td>
+                                      <td> {{ $teacher->email }}  </td>
+                                      <td> {{ $teacher->phone }}  </td>
+                                      <td> {{ $teacher->school->name }}  </td>
+                                      <td> {{ $teacher->address }} </td>
                                       <td>
-                                        <a class="btn btn-info" href="{{ route('admin.schools.edit' , $school->id) }}">
+                                        <a class="btn btn-info" href="{{ route('admin.teachers.edit' , $teacher->id) }}">
                                           <i class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-danger" href="{{ route('admin.schools.destroy' , $school->id) }}">
+                                        <a class="btn btn-danger" href="{{ route('admin.teachers.destroy' , $teacher->id) }}">
                                           <i class="fa fa-trash"></i>
                                         </a>
-                                      
                                       </td>
                                 </tr>
                               @endforeach
@@ -60,6 +63,8 @@
                           <tr>
                             <th>Rendering engine</th>
                             <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Platform(s)</th>
                             <th>Platform(s)</th>
                             <th>Engine version</th>
                             {{-- <th>CSS grade</th> --}}
