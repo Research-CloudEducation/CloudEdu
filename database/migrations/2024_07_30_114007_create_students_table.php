@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->text('profile')->nullable();
             $table->string('phone');
             $table->string('address');
             $table->unsignedBigInteger('school_id');

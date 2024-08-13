@@ -16,7 +16,8 @@ return new class extends Migration
             $table->json('name');
             $table->string('email')->unique();
             $table->string('password');
-            // $table->string('rank'); // this will see it later
+            $table->text('profile')->nullable();
+            $table->string('rank')->nullable(); // this will see it later
             $table->string('phone');
             $table->string('address');
             $table->unsignedBigInteger('school_id');

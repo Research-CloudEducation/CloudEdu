@@ -75,13 +75,13 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.schools.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ trans('sidebar.add') }}</p>
+                                <p>{{ trans('sidebar.addSchool') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.schools.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ trans('sidebar.show') }}</p>
+                                <p>{{ trans('sidebar.showSchool') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -100,6 +100,30 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            {{ trans('sidebar.agentsSection') }}
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">6</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.agents.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.add-agent') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.agents.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.show-agents') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             {{ trans('sidebar.teacherM') }}
@@ -110,13 +134,13 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.teachers.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ trans('sidebar.add') }}</p>
+                                <p>{{ trans('sidebar.add-teacher') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.teachers.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ trans('sidebar.show') }}</p>
+                                <p>{{ trans('sidebar.show-teacher') }}</p>
                             </a>
                         </li>
                        
@@ -126,59 +150,24 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
                         <p>
-                            UI Elements
+                           {{ trans('sidebar.studentSection') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/UI/general.html" class="nav-link">
+                            <a href="{{ route('admin.students.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>General</p>
+                                <p>{{ trans('sidebar.addStudent') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/UI/icons.html" class="nav-link">
+                            <a href="{{ route('admin.students.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Icons</p>
+                                <p>{{ trans('sidebar.showStudents') }}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="pages/UI/buttons.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Buttons</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/UI/sliders.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sliders</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/UI/modals.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Modals & Alerts</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/UI/navbar.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Navbar & Tabs</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/UI/timeline.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Timeline</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/UI/ribbons.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ribbons</p>
-                            </a>
-                        </li>
+                     
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">

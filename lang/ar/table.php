@@ -21,6 +21,7 @@ return [
     'FromSchool' => 'إختـر المدرســة',
     'confirmpassword' => 'تأكيد كلمة السر ',
     'school' => 'المدرسة',
+    'classLevel' => ' الفصل الدراسي ',
 ];
 
 

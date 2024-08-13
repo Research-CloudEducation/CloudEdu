@@ -18,7 +18,8 @@ return [
     'update'  => 'Update',
     'delete'  => 'Delete',
     'control'  => 'Control',
-    'school'  => 'School'
+    'school'  => 'School',
+    'classLevel' => 'Class Level'
 ];
 
 

@@ -14,7 +14,8 @@ return [
     'edit'   => 'Edit',
     'update'  => 'Update',
     'delete'  => 'Delete',
-    'control'  => 'Control'
+    'control'  => 'Control',
+    'classLevel' => 'Class Level',
 
     
 

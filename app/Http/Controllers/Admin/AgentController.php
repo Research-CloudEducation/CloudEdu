@@ -2,57 +2,141 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Agent;
+use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Agent\AgentCreateRequest;
+use App\Http\Requests\Agent\AgentUpdateRequest;
 
 class AgentController extends Controller
 {
     /**
-     * Show the form for creating the resource.
+     * Display a listing of the resource.
      */
-    public function create(): never
+
+     public function __construct()
+     {
+        return $this->middleware('admin');
+     }
+
+    public function index()
     {
-        abort(404);
+        // get all data related with agent of school here 
+        $agents = Agent::all();
+        return view('admin.agents.index' , compact('agents'));
     }
 
     /**
-     * Store the newly created resource in storage.
+     * Show the form for creating a new resource.
      */
-    public function store(Request $request): never
+    public function create()
     {
-        
-        abort(404);
+        // get data related also with agent of school to  create form by link 
+        $schools = School::all();
+        return view('admin.agents.create' , compact('schools'));
     }
 
     /**
-     * Display the resource.
+     * Store a newly created resource in storage.
      */
-    public function show()
+    public function store(AgentCreateRequest $request)
+    {
+        // after filter validate the request do below
+
+        // begin transaction with try 
+        DB::beginTransaction();
+
+        try {
+            // try to store data into 
+            Agent::create([
+                'name' => json_encode([
+                    'ar' => $request->name_ar,
+                    'en' => $request->name_en,
+                ]),
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'school_id' => $request->school_id
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.agents.index')->with('success' , 'Added Successfully');
+
+        } catch (\Throwable $th) {
+            //throw $th; if fail then do this 
+            DB::rollBack();
+
+            return back()->with('error' , 'Fail to add , Something went wrong');
+        }
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Agent $agent)
     {
         //
     }
 
     /**
-     * Show the form for editing the resource.
+     * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(Agent $agent)
     {
-        //
+        // get agent to edit details
+        return view('admin.agents.edit' , compact('agent'));
     }
 
     /**
-     * Update the resource in storage.
+     * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(AgentUpdateRequest $request, Agent $agent)
     {
-        //
+        // do update agent details 
+        DB::beginTransaction();
+
+        try {
+            $agent->create([
+                'name' => json_encode([
+                    'ar' => $request->name_ar,
+                    'en' => $request->name_en,
+                ]),
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'school_id' => $request->school_id
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.agents.index')->with('success' , 'Updated Successfully');
+
+        } catch (\Throwable $th) {
+            //throw $th; if fail then do this 
+            DB::rollBack();
+
+            return back()->with('error' , 'Fail to add , Something went wrong');
+        }
+
     }
 
     /**
-     * Remove the resource from storage.
+     * Remove the specified resource from storage.
      */
-    public function destroy(): never
+    public function destroy($agent)
     {
-        abort(404);
+        // try find agent first then do delete 
+        if (Agent::find($agent)) {
+            # do delete directly
+            Agent::find($agent)->delete();
+        }else {
+            # do something else 
+            return 'failed to delete no find such what you need (:';
+        }
     }
 }

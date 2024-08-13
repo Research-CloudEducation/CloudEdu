@@ -39,7 +39,7 @@ class SchoolController extends Controller
    
         DB::beginTransaction();
         try {
-            $store   =  School::create([
+              School::create([
                 'name' => json_encode([
                     'ar' => $request->name_ar,
                     'en' => $request->name_en,
