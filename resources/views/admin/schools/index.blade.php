@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title', 'المدارس | Dashboard')
-
+@section('page_sub_title' , 'قسـم المـدارس')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="#">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Link 1</a></li>
@@ -40,7 +40,7 @@
                               @foreach ($schools as $school)
                                 <tr>
                                       <td> {{ $school->name }} </td>
-                                      <td> {{ $school->description }} {{ __('test') }} </td>
+                                      <td> {{ $school->description }}  </td>
                                       <td> {{ $school->address }} </td>
                                       <td>
                                         <a class="btn btn-info" href="{{ route('admin.schools.edit' , $school->id) }}">

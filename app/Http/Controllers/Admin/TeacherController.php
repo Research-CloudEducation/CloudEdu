@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\TeacherCreateRequest;
+use App\Http\Requests\Teacher\TeacherUpdateRequest;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
@@ -87,9 +88,34 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(TeacherUpdateRequest $request, Teacher $teacher)
     {
-        //
+        // get teacher and update details 
+        DB::beginTransaction();
+
+        try {
+            $teacher->create([
+                'name' => json_encode([
+                    'ar' => $request->name_ar,
+                    'en' => $request->name_en,
+                ]),
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'school_id' => $request->school_id
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.teachers.index')->with('success' , 'Updated Successfully');
+
+        } catch (\Throwable $th) {
+            //throw $th; if fail then do this 
+            DB::rollBack();
+
+            return back()->with('error' , 'Fail to update , Something went wrong');
+        }
+
     }
 
     /**

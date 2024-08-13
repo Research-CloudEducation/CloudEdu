@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title', 'المدارس | Dashboard')
-@section('page_sub_title' , 'Class Level')
+@section('page_sub_title' , 'إضافة فصل دراسي ')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="#">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Link 1</a></li>

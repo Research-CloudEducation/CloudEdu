@@ -11,12 +11,23 @@ class School extends Model
     use HasFactory;
     protected $guarded = [];
 
-    // make relationship between 
+    // make relationship between  school and teacher 
      public function teachers() : HasMany 
      {
         return $this->hasMany(Teacher::class);
      }
+     // make relation between agent and school 
 
+     public function agents() : HasMany
+     {
+        return $this->hasMany(Agent::class);
+     }
+     // make relationship between school and student 
+     
+     public function students() : HasMany
+     {
+        return $this->hasMany(Student::class);
+     }
     public function attrByLocale($locale = 'ar' , $attr = 'name')
     {
         $arr = json_decode($this->getRawOriginal($attr) , true);

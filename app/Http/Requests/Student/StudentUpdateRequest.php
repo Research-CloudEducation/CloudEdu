@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\School;
+namespace App\Http\Requests\Student;
 
-use App\Models\School;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SchoolRequest extends FormRequest
+class StudentUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,7 @@ class SchoolRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_ar' => ['required' , 'string' ,'unique:'.School::class . ',name'],
-            'description_ar' => ['required' , 'string'],
-            'address' => 'required'
+            //
         ];
     }
 }

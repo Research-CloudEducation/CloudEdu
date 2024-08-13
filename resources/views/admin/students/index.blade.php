@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title', 'المدارس | Dashboard')
-@section('page_sub_title' , ' قســم الفصول الدراســية ')
+@section('page_sub_title' , 'قســم الطــلاب')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="#">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Link 1</a></li>
@@ -21,7 +21,7 @@
                 @endif
                   <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">{{ __('قائمــة الفصول الدراســية') }}</h3>
+                        <h3 class="card-title "> {{ trans('sidebar.teacherM') }} </h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
@@ -29,25 +29,32 @@
                           <thead>
                           <tr>
                             <th>{{ trans('table.name') }}</th>
-                            <th>{{ trans('table.description') }}</th>
+                            <th>{{ trans('table.email') }}</th>
+                            <th>{{ trans('table.phone') }}</th>
+                            <th>{{ trans('table.school') }}</th>
+                            <th>{{ trans('table.classLevel') }}</th>
+                            <th>{{ trans('table.address') }}</th>
                             <th>{{ trans('form.control') }}</th>
                             {{-- <th>CSS grade</th> --}}
                           </tr>
                           </thead>
                           <tbody>
 
-                              @foreach ($classes as $class)
+                              @foreach ($students as $student)
                                 <tr>
-                                      <td> {{ $class->name }} </td>
-                                      <td> {{ $class->description }}  </td>
+                                      <td> {{ $student->name }} </td>
+                                      <td> {{ $student->email }}  </td>
+                                      <td> {{ $student->phone }}  </td>
+                                      <td> {{ $student->school->name }}  </td>
+                                      <td> {{ $student->classLevel->name }}  </td>
+                                      <td> {{ $student->address }} </td>
                                       <td>
-                                        <a class="btn btn-info" href="{{ route('admin.class-level.edit' , $class->id) }}">
+                                        <a class="btn btn-info" href="{{ route('admin.students.edit' , $student->id) }}">
                                           <i class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-danger" href="{{ route('admin.class-level.destroy' , $class->id) }}">
+                                        <a class="btn btn-danger" href="{{ route('admin.students.destroy' , $student->id) }}">
                                           <i class="fa fa-trash"></i>
                                         </a>
-                                      
                                       </td>
                                 </tr>
                               @endforeach
@@ -58,6 +65,10 @@
                           <tr>
                             <th>Rendering engine</th>
                             <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Platform(s)</th>
+                            <th>Platform(s)</th>
+                            <th>Platform(s)</th>
                             <th>Engine version</th>
                             {{-- <th>CSS grade</th> --}}
                           </tr>

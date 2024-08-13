@@ -17,6 +17,7 @@ return [
     'control'  => ' تحكــم',
     'FromSchool' => 'إختـر المدرســة',
     'confirmpassword' => 'تأكيد كلمة السر ',
+    'classLevel'  => ' الفصل الدراسي ',
     
 
 ];

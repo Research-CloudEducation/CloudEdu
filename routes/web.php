@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\ClassLevelController;
 use App\Http\Controllers\Admin\SchoolController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -49,7 +51,10 @@ Route::group(
             // Route::get('school/edit/{id}', [SchoolController::class , 'edit'])->name('school.edit');
             // Route::patch('school/update/{id}', [SchoolController::class , 'update'])->name('school.update');
             Route::get('school/destroy-school/{id}', [SchoolController::class , 'destroy'])->name('schools.destroy');
+            // manage Agents route 
 
+            Route::resource('agents', AgentController::class)->except('destroy');
+            Route::get('agents/{id}/destroy' , [AgentController::class , 'destroy'])->name('agents.destroy');            
             // manage teachers routes 
             Route::resource('/teachers' , TeacherController::class)->except('destroy');
             Route::get('teachers/destroy-teacher/{id}' , [TeacherController::class , 'destroy'])->name('teachers.destroy');
@@ -59,6 +64,12 @@ Route::group(
             Route::resource('/class-level' , ClassLevelController::class)->except('destroy');
 
             Route::get('class-level/{id}/destroy' , [ClassLevelController::class , 'destroy'])->name('class-level.destroy');
+
+            // manage students routes 
+
+            Route::resource('/students' , StudentController::class)->except('destroy');
+
+            Route::get('students/{id}/destroy' , [StudentController::class , 'destroy'])->name('students.destroy');
         });
 
     });

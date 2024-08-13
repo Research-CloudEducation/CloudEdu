@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title', 'المدارس | Dashboard')
+@section('page_sub_title' , ' قسـم الاساتـذة')
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="#">Home</a></li>
