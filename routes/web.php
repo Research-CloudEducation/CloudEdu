@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ClassLevelController;
 use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\AgentController as ControllersAgentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -21,6 +22,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,7 +37,8 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){ //...
-
+        Route::get('agent/login' , [ControllersAgentController::class , 'createSession'] )->name('agent.createSession');
+        Route::post('agent/login' , [ControllersAgentController::class , 'login'] )->name('agent.login');
         Route::middleware('auth' , 'admin')->name('admin.')->prefix('admin')->group(function () {
             Route::get('/' , [AdminController::class , 'index'])->name('index');
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -86,4 +89,3 @@ Route::group(
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';

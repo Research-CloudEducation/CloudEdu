@@ -1,7 +1,7 @@
 <?php
 
 namespace Illuminate\Contracts\Auth;
-
+use App\Models\Agent;
 interface Authenticatable
 {
     /**

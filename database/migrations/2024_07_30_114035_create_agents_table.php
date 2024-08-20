@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('is_agent')->default(false);
             $table->text('profile')->nullable();
             $table->string('address');
             $table->string('phone');

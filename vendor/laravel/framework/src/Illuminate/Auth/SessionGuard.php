@@ -26,7 +26,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-
+use App\Models\Agent;
 class SessionGuard implements StatefulGuard, SupportsBasicAuth
 {
     use GuardHelpers, Macroable;
