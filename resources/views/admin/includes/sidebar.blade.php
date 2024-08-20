@@ -98,30 +98,32 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            {{ trans('sidebar.agentsSection') }}
-                            <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">6</span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.agents.create') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{ trans('sidebar.add-agent') }}</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.agents.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{ trans('sidebar.show-agents') }}</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+               @if (auth()->user()->is_admin)
+               <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        {{ trans('sidebar.agentsSection') }}
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right">6</span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.agents.create') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>{{ trans('sidebar.add-agent') }}</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.agents.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>{{ trans('sidebar.show-agents') }}</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+               @endif
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -174,7 +176,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Forms
+                            {{ trans('sidebar.contentSection') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -182,10 +184,10 @@
                         <li class="nav-item">
                             <a href="pages/forms/general.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>General Elements</p>
+                                <p>{{ trans('sidebar.show-contents') }}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="pages/forms/advanced.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Advanced Elements</p>
@@ -196,7 +198,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Editors</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">

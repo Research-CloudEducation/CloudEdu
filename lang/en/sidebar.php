@@ -16,6 +16,8 @@ return [
     'showStudents' => 'Show Students',
     'studentSection' => 'Students Section',
     'addStudent'  => 'Add new Student',
+    'contentSection'  => 'Contents Section',
+    'show-contents'   => 'Show Contents',
 ];
 
 

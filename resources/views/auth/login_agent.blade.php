@@ -1,18 +1,25 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="row">
         <div class="col">
-            <a href="{{ route('login') }}">{{ __('Admin') }}</a>
+            <div>
+                <a href="{{ route('login') }}">{{ __('Admin') }}</a>
+
+            </div>
         </div>
-        <p>
+        <span>
             {{ __('Role As') }}
-        </p>
+        </span>
         <div class="col">
-            <a href="{{ route('agent.createSession') }}"> {{ __('Agent') }}</a>
+            <div>
+                <a href="{{ route('agent.createSession') }}"> {{ __('Agent') }}</a>
+
+            </div>
         </div>
     </div>
-    <form method="POST" action="{{ route('login') }}">
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+    
+    <form method="POST" action="{{ route('agent.login') }}">
         @csrf
 
         <!-- Email Address -->

@@ -17,6 +17,8 @@ return [
     'studentSection' => 'قسـم الطـلاب ',
     'showStudents' => 'عـــرض الـطلاب',
     'addStudent' => ' إضـــافة طالــب',
+    'contentSection' => 'قسم المحتوى التعليمي',
+    'show-contents' => 'عــرض المحــتوى',
 ];
 
 
