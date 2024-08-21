@@ -44,7 +44,7 @@ class AgentController extends Controller
         
                 ]);
          }
-         return 'Done :)';
+         return redirect()->route('agent.teachers.index');
     }
     public function store(Request $request)
     {

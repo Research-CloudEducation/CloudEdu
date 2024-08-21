@@ -14,7 +14,7 @@
                 <img src="{{ asset('dashboard/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ route('admin.profile.edit') }}" class="d-block">{{ auth()->user()->name }}</a>
+                <a href="{{ route('admin.profile.edit') }}" class="d-block">{{ auth()->user()->name ?? Auth::guard('agent')->user()->name }}</a>
             </div>
         </div>
 
@@ -98,7 +98,6 @@
                         </li>
                     </ul>
                 </li>
-               @if (auth()->user()->is_admin)
                <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
@@ -123,7 +122,7 @@
                     </li>
                 </ul>
             </li>
-               @endif
+            
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>

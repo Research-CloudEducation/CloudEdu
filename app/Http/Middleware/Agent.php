@@ -16,10 +16,9 @@ class Agent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if (!Auth::guard('agent')->check() || !Auth::guard('agent')->user()->is_agent) {
-        //     #if not view abort 
-        //     abort(403);
-        // }
+        if (!Auth::guard('agent')->check() || !Auth::guard('agent')->user()->is_agent) {
+            abort (403);
+       }
         return $next($request);
     }
 }
