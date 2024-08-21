@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\ClassLevelController;
 use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
-use App\Http\Controllers\AgentController as ControllersAgentController;
+use App\Http\Controllers\Admin\ClassLevelController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\AgentController as ControllersAgentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,16 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){ //...
+        // home routes 
+        Route::get('/', function () {
+            return view('welcome');
+        });
+
+        // set session routes with login agent 
         Route::get('agent/login' , [ControllersAgentController::class , 'createSession'] )->name('agent.createSession');
         Route::post('agent/login' , [ControllersAgentController::class , 'login'] )->name('agent.login');
-        Route::middleware('auth' , 'admin')->name('admin.')->prefix('admin')->group(function () {
+        Route::middleware('auth' , 'admin' )->name('admin.')->prefix('admin')->group(function () {
+            Route::resource('users', UserController::class);
             Route::get('/' , [AdminController::class , 'index'])->name('index');
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -75,6 +83,20 @@ Route::group(
             Route::get('students/{id}/destroy' , [StudentController::class , 'destroy'])->name('students.destroy');
         });
 
+        // manage routes of agents of schools 
+        Route::middleware('agent')->name('agent.')->prefix('agent')->group( function () {
+             // manage teachers routes 
+             Route::get('/' , function() {
+                return 'this it\'s work';
+             })->name('test');
+             Route::resource('/teachers' , TeacherController::class)->except('destroy');
+             Route::get('teachers/destroy-teacher/{id}' , [TeacherController::class , 'destroy'])->name('teachers.destroy');
+             // manage students routes 
+
+             Route::resource('/students' , StudentController::class)->except('destroy');
+
+             Route::get('students/{id}/destroy' , [StudentController::class , 'destroy'])->name('students.destroy');
+        });
     });
 /** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
 

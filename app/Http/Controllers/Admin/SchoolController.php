@@ -12,6 +12,7 @@ use App\Http\Requests\School\SchoolRequest;
 
 class SchoolController extends Controller
 {
+  
     /**
      * Display a listing of the resource.
      */
