@@ -1,6 +1,7 @@
 <?php 
 
 return [
+    'name'   => 'Name',
     'name_ar' => 'Name In Arabic',
     'name_en' => 'Name In English',
     'desc_ar' => 'Description In Arabic',
@@ -16,6 +17,14 @@ return [
     'delete'  => 'Delete',
     'control'  => 'Control',
     'classLevel' => 'Class Level',
+    'LoginAs'  => 'Login As ',
+    'admin'  => ' As Administrator',
+    'agent' =>  'As Agent',
+    'title'  => 'Title',
+    'content'=> 'The Content',
+    'file'   => 'File Uploaded',
+    'image'  => 'Picture Or Short Book',
+    'subject'  => 'Exercise For Subject',
 
     
 

@@ -21,7 +21,7 @@
                 @endif
                   <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title "> {{ trans('sidebar.agentsSection') }} </h3>
+                        <h3 class="card-title "> {{ trans('sidebar.usersSection') }} </h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
@@ -39,12 +39,12 @@
                           </thead>
                           <tbody>
 
-                              @foreach ($agents as $agent)
-                                <tr>
+                              @foreach ($users as $agent)
+                                <tr  >
                                       <td> {{ $agent->name }} </td>
                                       <td> {{ $agent->email }}  </td>
                                       <td> {{ $agent->phone }}  </td>
-                                      <td> {{ $agent->school->name }}  </td>
+                                      <td> {{ $agent->school->name  }}  </td>
                                       <td> {{ $agent->address }} </td>
                                       <td>
                                         <a class="btn btn-info" href="{{ route('admin.agents.edit' , $agent->id) }}">

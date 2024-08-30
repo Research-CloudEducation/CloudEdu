@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->json('title');
-            $table->json('type');
-
+            $table->json('content');
+            $table->text('image')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('teacher_id');
 

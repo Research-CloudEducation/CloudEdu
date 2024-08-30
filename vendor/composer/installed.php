@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1bdd801529a54ec0030921d1d63164240df32a98',
+        'reference' => 'd0fdee08a168118b0d21aeb918dad1745a42f034',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -364,6 +364,15 @@
                 0 => 'v10.48.17',
             ),
         ),
+        'kkszymanowski/traitor' => array(
+            'pretty_version' => '1.1.0',
+            'version' => '1.1.0.0',
+            'reference' => '97d12e2b045fcc4e132fed5ddee3b1dcff409989',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kkszymanowski/traitor',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -391,7 +400,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1bdd801529a54ec0030921d1d63164240df32a98',
+            'reference' => 'd0fdee08a168118b0d21aeb918dad1745a42f034',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -448,6 +457,15 @@
             'reference' => '502e0fe3f0415d06d5db1f83a472f0f3b754bafe',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/tinker',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'laravelcollective/html' => array(
+            'pretty_version' => 'v6.4.1',
+            'version' => '6.4.1.0',
+            'reference' => '64ddfdcaeeb8d332bd98bef442bef81e39c3910b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravelcollective/html',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -673,6 +691,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'plustime-it/laravel-easyforms' => array(
+            'pretty_version' => '0.2.28',
+            'version' => '0.2.28.0',
+            'reference' => 'e4db538cfa30889e75400ed030f092766a686529',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../plustime-it/laravel-easyforms',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'psr/clock' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -835,6 +862,15 @@
             'replaced' => array(
                 0 => '4.7.6',
             ),
+        ),
+        'santigarcor/laratrust' => array(
+            'pretty_version' => '8.3.1',
+            'version' => '8.3.1.0',
+            'reference' => '9510e60f891a05bb87164666e26150818cb40b3c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../santigarcor/laratrust',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'sebastian/cli-parser' => array(
             'pretty_version' => '2.0.1',

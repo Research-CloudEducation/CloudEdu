@@ -12,10 +12,24 @@ class ClassLevel extends Model
 
     protected $guarded = [];
     
+    // create relationship between category classLevel 
+    public function categories() : HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+    public function classLevels() : HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
     // create relationship between student class 
     public function students() : HasMany
     {
         return $this->hasMany(Student::class);
+    }
+ 
+    public function contents() : HasMany
+    {
+        return $this->hasMany(Content::class);
     }
     public function attrByLocale($locale = 'ar' , $attr = 'name')
     {

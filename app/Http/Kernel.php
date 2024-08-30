@@ -58,6 +58,9 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         // set role permission aliases
+        // 'role' => \Laratrust\Middleware\LaratrustRole::class,
+        // 'permission' => \Laratrust\Middleware\LaratrustPermission::class,
+        // 'ability' => \Laratrust\Middleware\LaratrustAbility::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,

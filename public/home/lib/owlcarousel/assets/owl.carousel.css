@@ -79,7 +79,7 @@
     cursor: move;
     cursor: grab; }
   .owl-carousel.owl-rtl {
-    direction: rtl; }
+    direction: rtl !important; }
   .owl-carousel.owl-rtl .owl-item {
     float: right; }
 

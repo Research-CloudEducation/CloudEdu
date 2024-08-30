@@ -19,7 +19,8 @@ return [
     'delete'  => 'Delete',
     'control'  => 'Control',
     'school'  => 'School',
-    'classLevel' => 'Class Level'
+    'classLevel' => 'Class Level',
+    'file-name' => 'File Name',
 ];
 
 

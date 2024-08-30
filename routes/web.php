@@ -2,16 +2,25 @@
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AgentController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\ClassLevelController;
+use App\Http\Controllers\Admin\ContentControllrt;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AgentController as ControllersAgentController;
+use App\Http\Controllers\CategoryController as ControllersCategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GetContentController;
+use App\Http\Controllers\GetTeacherController;
+use App\Http\Controllers\StudentController as ControllersStudentController;
+use App\Http\Controllers\TeacherController as ControllersTeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +49,46 @@ Route::group(
     ], function(){ //...
         // home routes 
         Route::get('/', function () {
-            return view('welcome');
+            return view('home.index');
         });
+        // sessions
+        Route::view('sessions/signIn', 'sessions.signIn')->name('signIn');
+        Route::view('sessions/signIn-teacher', 'sessions.signIn-teacher')->name('signInTeacher');
+        Route::view('sessions/signUp', 'sessions.signUp')->name('signUp-student');
+        Route::view('sessions/signUp-teacher', 'sessions.signUp-teacher')->name('signUp');
+        Route::view('sessions/forgot', 'sessions.forgot')->name('forgot');
+        // profile page  route 
+        Route::view('sessions/user-profile', 'sessions.user-profile')->name('userProfile');
+        Route::view('sessions/teacher-profile', 'sessions.teacher-profile')->name('teacherProfile');
+        Route::view('sessions/student-profile', 'sessions.student-profile')->name('studentProfile');
 
-        // set session routes with login agent 
-        Route::get('agent/login' , [ControllersAgentController::class , 'createSession'] )->name('agent.createSession');
-        Route::post('agent/login' , [ControllersAgentController::class , 'login'] )->name('agent.login');
-        Route::middleware('auth' , 'admin' )->name('admin.')->prefix('admin')->group(function () {
-            Route::resource('users', UserController::class);
+        // manage student side homepage routes
+        Route::resource('/students' , ControllersStudentController::class);
+        Route::post('/SignIn-student', [ControllersStudentController::class,'signIn'])->name('students.signIn');
+        Route::get('/students', [ControllersStudentController::class , 'logout'])->name('students.signOut');
+        // manage teacher side homepage route
+        Route::resource('/teachers' , ControllersTeacherController::class);
+        Route::resource('/teachers-index' , GetTeacherController::class);
+        Route::post('/SignIn', [ControllersTeacherController::class,'signIn'])->name('teacherSignIn');
+        Route::get('/teacher/profile', [ControllersTeacherController::class,'profile'])->name('teacher.profile');
+        // Route::get('/teachers/login' , [ControllersTeacherController::class , 'signIn'])->name('teachers.signIn');
+        Route::get('/teachers' , [ControllersTeacherController::class , 'logout'])->name('teachers.signOut');
+
+        // manage category routes 
+        Route::resource('/categories', ControllersCategoryController::class);
+
+        Route::resource('/get-contents' , GetContentController::class);
+        Route::get('/get-contents/content/{id}' , [GetContentController::class , 'getContent'])->name('get-content');
+
+        // comments routes 
+        Route::resource('/comments' , CommentController::class);
+        Route::get('/chat' , function(){
+            return view('home.chat');
+        })->name('chat.student');
+
+        Route::middleware(['auth'])->name('admin.')->prefix('admin')->group(function () {
+            Route::resource('users', profileController::class);
+            Route::resource('roles', RoleController::class);
             Route::get('/' , [AdminController::class , 'index'])->name('index');
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -76,6 +117,15 @@ Route::group(
 
             Route::get('class-level/{id}/destroy' , [ClassLevelController::class , 'destroy'])->name('class-level.destroy');
 
+            // manage subjects routes 
+            Route::resource('/categories' , CategoryController::class)->except('destroy');
+            Route::get('categories/{id}/destroy' , [CategoryController::class , 'destroy'])->name('categories.destroy');
+            // manage content routes 
+            Route::resource('/contents', ContentControllrt::class)->except('destroy');
+            Route::get('/contents/{id}/destroy', [ContentControllrt::class , 'destroy'])->name('contents.destroy');
+
+            // get content by class level using Ajax 
+            Route::get('/get-content-by-classLevel' , [ContentControllrt::class , 'getContentBy'])->name('contents.getContentBy');
             // manage students routes 
 
             Route::resource('/students' , StudentController::class)->except('destroy');
@@ -84,19 +134,19 @@ Route::group(
         });
 
         // manage routes of agents of schools 
-        Route::middleware('agent')->name('agent.')->prefix('agent')->group( function () {
-             // manage teachers routes 
-             Route::get('/' , function() {
-                return 'this it\'s work';
-             })->name('test');
-             Route::resource('/teachers' , TeacherController::class)->except('destroy');
-             Route::get('teachers/destroy-teacher/{id}' , [TeacherController::class , 'destroy'])->name('teachers.destroy');
-             // manage students routes 
+        // Route::middleware('agent')->name('agent.')->prefix('agent')->group( function () {
+        //      // manage teachers routes 
+        //      Route::get('/' , function() {
+        //         return 'this it\'s work';
+        //      })->name('test');
+        //      Route::resource('/teachers' , TeacherController::class)->except('destroy');
+        //      Route::get('teachers/destroy-teacher/{id}' , [TeacherController::class , 'destroy'])->name('teachers.destroy');
+        //      // manage students routes 
 
-             Route::resource('/students' , StudentController::class)->except('destroy');
+        //      Route::resource('/students' , StudentController::class)->except('destroy');
 
-             Route::get('students/{id}/destroy' , [StudentController::class , 'destroy'])->name('students.destroy');
-        });
+        //      Route::get('students/{id}/destroy' , [StudentController::class , 'destroy'])->name('students.destroy');
+        // });
     });
 /** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
 

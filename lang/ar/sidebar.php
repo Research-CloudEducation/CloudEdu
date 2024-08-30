@@ -19,6 +19,13 @@ return [
     'addStudent' => ' إضـــافة طالــب',
     'contentSection' => 'قسم المحتوى التعليمي',
     'show-contents' => 'عــرض المحــتوى',
+    'create-content' => 'إضافة محــتوى',
+    'roles'   => 'الصـلاحيات',
+    'show-role' => 'عــرض الصلاحيات',
+    'show-user-role' => 'صلاحيات  المستخدمين',
+    'show-agent-role' => 'صلاحيات  الوكلاء',
+    'add-category' => ' إضافة مادة ',
+    'show-category' => 'عــرض المواد التعليمية ',
 ];
 
 

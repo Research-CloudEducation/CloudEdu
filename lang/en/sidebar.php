@@ -18,6 +18,12 @@ return [
     'addStudent'  => 'Add new Student',
     'contentSection'  => 'Contents Section',
     'show-contents'   => 'Show Contents',
+    'roles'   => 'Roles And Permissions',
+    'show-role' => 'Show Permission',
+    'show-user-role' => 'Show Users Permissions',
+    'show-agent-role' => 'Show Agents Permissions',
+    'add-category'  => 'Add new subject',
+    'show-category' => 'Show Subjects',
 ];
 
 

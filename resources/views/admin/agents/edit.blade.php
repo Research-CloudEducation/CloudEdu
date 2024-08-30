@@ -14,7 +14,7 @@
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <div class="max-w-3xl">
                 <section>
-                    <form method="post" action="{{ route('admin.agents.update') }}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ route('admin.agents.update' , $agent->id) }}" class="mt-6 space-y-6">
                         @csrf
                         @method('patch')
                         @if(session('success'))

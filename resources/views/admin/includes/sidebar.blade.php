@@ -62,6 +62,41 @@
                         </p>
                     </a>
                 </li>
+                @can('role-list')
+                    
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            {{ trans('sidebar.roles') }}
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">6</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.roles.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.roles') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.users.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.show-user-role') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.agents.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.show-agent-role') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endcan
+                
+               @can('school-list')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -98,7 +133,10 @@
                         </li>
                     </ul>
                 </li>
-               <li class="nav-item has-treeview">
+               @endcan
+                
+              @can('agent-list')
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
@@ -121,7 +159,8 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+               </li>
+              @endcan
             
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -181,7 +220,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/forms/general.html" class="nav-link">
+                            <a href="{{ route('admin.categories.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.add-category') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.show-category') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.contents.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ trans('sidebar.create-content') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.contents.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{ trans('sidebar.show-contents') }}</p>
                             </a>
@@ -200,7 +257,7 @@
                         </li> --}}
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
+                {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
@@ -425,7 +482,7 @@
                         <i class="nav-icon far fa-circle text-info"></i>
                         <p>Informational</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

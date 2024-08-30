@@ -60,7 +60,7 @@
  <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#">
         <div>
-            {{ Auth::user()->name ?? Auth::guard('agent')->user()->name }}
+            {{ Auth::user()->name   }}
         </div>
     </a>
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

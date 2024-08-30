@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Agent;
 
+use App\Models\User;
 use App\Models\Agent;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,11 +26,9 @@ class AgentCreateRequest extends FormRequest
     {
         return [
             'name_ar' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Agent::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Password::defaults()],
-            'address'  => 'required',
             'school_id' => 'required',
-            'phone'  =>  ['required' , 'numeric']
         ];
     }
 }

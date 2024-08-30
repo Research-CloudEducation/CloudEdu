@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Agent\AgentCreateRequest;
 use App\Http\Requests\Agent\AgentUpdateRequest;
+use App\Models\User;
+use Hamcrest\Core\IsNot;
 
 class AgentController extends Controller
 {
@@ -25,8 +27,8 @@ class AgentController extends Controller
     public function index()
     {
         // get all data related with agent of school here 
-        $agents = Agent::all();
-        return view('admin.agents.index' , compact('agents'));
+            $data = User::whereNot('is_admin' , true)->get();
+        return view('admin.users.index1' , compact('data'));
     }
 
     /**
@@ -45,13 +47,13 @@ class AgentController extends Controller
     public function store(AgentCreateRequest $request)
     {
         // after filter validate the request do below
-
+        // dd($request->all());
         // begin transaction with try 
         DB::beginTransaction();
 
         try {
             // try to store data into 
-            Agent::create([
+            User::create([
                 'name' => json_encode([
                     'ar' => $request->name_ar,
                     'en' => $request->name_en,
@@ -86,22 +88,23 @@ class AgentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Agent $agent)
+    public function edit(User $agent)
     {
         // get agent to edit details
-        return view('admin.agents.edit' , compact('agent'));
+        $schools = School::all();
+        return view('admin.agents.edit' , compact('agent' , 'schools'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AgentUpdateRequest $request, Agent $agent)
+    public function update(AgentUpdateRequest $request, User $agent)
     {
         // do update agent details 
         DB::beginTransaction();
 
         try {
-            $agent->create([
+            $agent->update([
                 'name' => json_encode([
                     'ar' => $request->name_ar,
                     'en' => $request->name_en,
@@ -131,9 +134,9 @@ class AgentController extends Controller
     public function destroy($agent)
     {
         // try find agent first then do delete 
-        if (Agent::find($agent)) {
+        if (User::find($agent)) {
             # do delete directly
-            Agent::find($agent)->delete();
+            User::find($agent)->delete();
         }else {
             # do something else 
             return 'failed to delete no find such what you need (:';
