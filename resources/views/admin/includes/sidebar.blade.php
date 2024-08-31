@@ -3,7 +3,7 @@
     <a href="{{ route('admin.index') }}" class="brand-link  link">
         <img src="{{ asset('dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">{{ trans('home.dashboard') }}</span>
+        <span class="brand-text font-weight-light">i{{ Auth::user()->is_admin ?  trans('home.dashboard')  : trans('home.dashboard1') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -97,7 +97,7 @@
                 @endcan
                 
                @can('school-list')
-                <li class="nav-item has-treeview">
+                {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -107,12 +107,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('school-add')
                         <li class="nav-item">
                             <a href="{{ route('admin.schools.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{ trans('sidebar.addSchool') }}</p>
                             </a>
                         </li>
+                    @endcan
                         <li class="nav-item">
                             <a href="{{ route('admin.schools.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -132,7 +134,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                @endcan
                 
               @can('agent-list')
@@ -153,7 +155,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.agents.index') }}" class="nav-link">
+                        <a href="{{ route('admin.agents.index' , ['agent' => 'agent']) }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>{{ trans('sidebar.show-agents') }}</p>
                         </a>
@@ -161,7 +163,7 @@
                 </ul>
                </li>
               @endcan
-            
+            @can('teacher-list')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -186,6 +188,8 @@
                        
                     </ul>
                 </li>
+                @endcan
+            @can('student-list')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
@@ -210,6 +214,8 @@
                      
                     </ul>
                 </li>
+            @endcan
+            @can('content-list')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
@@ -257,6 +263,7 @@
                         </li> --}}
                     </ul>
                 </li>
+            @endcan
                 {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>

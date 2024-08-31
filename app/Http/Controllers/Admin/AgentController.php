@@ -24,11 +24,17 @@ class AgentController extends Controller
         return $this->middleware('admin');
      }
 
-    public function index()
+    public function index(Request $request)
     {
-        // get all data related with agent of school here 
-            $data = User::whereNot('is_admin' , true)->get();
-        return view('admin.users.index1' , compact('data'));
+       if ($request->has('agent')) {
+         // get all data related with agent of school here 
+         $users = User::whereNot('is_admin' , true)->get();
+         return view('admin.agents.index' , compact('users'));
+       }else{
+         // get all data related with agent of school here 
+         $data = User::whereNot('is_admin' , true)->get();
+         return view('admin.users.index1' , compact('data'));
+       }
     }
 
     /**

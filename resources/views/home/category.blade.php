@@ -13,13 +13,22 @@
             <div class="row mt-4">
                 <div class="col-md-6 col-md-12">
                     <div class="row">
-                            @foreach ($categories as $category)
-                                    {{-- @if ($category->class_id == ) --}}
+                            @foreach ($classLevels as $class)
+                                {{-- @foreach ($classLevels as $item)
+                                @endforeach --}}
+                                {{-- @for ($i = $category->class_id; $i <= $classLevels->count(); $i++) --}}
+                                
+                                <p class="text-22 text-center">{{ $class->name }}</p>
+                                @foreach ($categories as $category)
+                                   @if ($class->id == $category->class_id)
+                                       
+                                                 
                                     <div class="col-md-4">
                                         <div class="card card-icon mb-4">
                                             <div class="card-body text-center">
                                                 <i class="fa fa-4x fa-book-open"></i>
                                                 <h4 class="text-muted mt-2 text-25 mb-2">{{ $category->name }}</h4>
+                                              
                                                 <p class="lead text-22 m-0">{{ $category->classlevel->name }}</p>
                                             </div>
                                             <div class="row">
@@ -33,7 +42,9 @@
                                         {{-- <div class="fa  fa-divide"></div> --}}
         
                                     </div>
-                                    {{-- @endif --}}
+                                    {{-- @endfor --}}
+                                    @endif 
+                            @endforeach
                             @endforeach
 
                         {{-- <div class="col-md-4">

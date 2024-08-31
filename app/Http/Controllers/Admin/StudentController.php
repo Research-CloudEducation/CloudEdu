@@ -20,7 +20,7 @@ class StudentController extends Controller
     public function index()
     {
         // get all school and class level
-        $students = Student::all();
+        $students = Student::orderBy('id' ,'DESC')->get();
         // $schools  = School::all();
         // $classLevels = ClassLevel::all();
 
@@ -61,6 +61,7 @@ class StudentController extends Controller
                 'address' => $request->address,
                 'school_id' => $request->school_id,
                 'class_id'  => $request->class_id,
+                'approve'   => true,
             ]);
 
             DB::commit();
@@ -131,6 +132,32 @@ class StudentController extends Controller
         }
     }
 
+    public function approve($student)
+    {
+
+        // dd($student);
+        $student = Student::find($student);
+        DB::beginTransaction();
+
+        try {
+            // try to update data 
+            $student->update([
+    
+                'approve' => true,
+
+            ]);
+
+            DB::commit();
+
+            return back()->with('success' , 'Student Has Been Approval Successfully ');
+        } catch (\Throwable $th) {
+            //throw $th if failed then roll back from transaction ;
+
+            DB::rollBack();
+
+            return back()->with('error' , 'Failed Something went wrong');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

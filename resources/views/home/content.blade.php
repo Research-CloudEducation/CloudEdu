@@ -23,9 +23,10 @@
                                 <img class="card-img-left" style="width: 390px ; height:220px" src="{{ ($content->image != null )  ?  asset('upload/content/' . $content->image) : 'http://127.0.0.1:8001/assets/images/photo-wide-2.jpg' }}" alt="">
                             </div>
                             <div class="flex-grow-1 p-4">
-                                <h5 class="m-0">{{ $content->title }}</h5>
+                                <h5 class="m-0 text-20">{{ $content->title }}</h5>
+                                <h6 class="text-bold mt-2 ">  {{ __('table.category-name') }} : {{ $content->category->name }}</h6>
+                                <h6 class="text-bold ">  {{ __('table.classLevel') }} : {{ $content->classLevel->name }}</h6>
                                 <p class="text-muted mt-3">{{ Str::limit($content->content , 100) }}</p>
-                                <div>Buttons Raised</div>
                                 <a download="{{ asset('upload/content/' . $content->category->file) }}" href="{{ asset('upload/content/' . $content->category->file) }}">
                                     <button type="button" class="btn btn-raised btn-raised-primary m-1">
                                         {{ trans('homepage.downlaod') }}

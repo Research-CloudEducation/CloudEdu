@@ -67,7 +67,7 @@
                          @if (Auth::guard('teacher')->check() || Auth::guard('student')->check() )
                             <a href="#" class="nav-link dropdown-toggle btn btn-primary py-4 px-lg-5 d-none d-lg-block" data-bs-toggle="dropdown">{{ Auth::guard('teacher')->user()->name ?? Auth::guard('student')->user()->name }} <i class="fa fa-arrow-right ms-3"></i></a>
                             <div class="dropdown-menu fade-down m-0">
-                                <a href="{{ Auth::guard('student')->check() ? route('studentProfile') : route('teacherProfile') }}" class="dropdown-item">{{ trans('homepage.m-profile') }}</a>
+                                <a href="{{ Auth::guard('student')->check() ? route('students.profile') : route('teacher.profile') }}" class="dropdown-item">{{ trans('homepage.m-profile') }}</a>
                                 <a href="{{ Auth::guard('teacher')->check() ? route('students.signOut') : route('teachers.signOut') }}" class="dropdown-item">{{ trans('homepage.logout') }}</a>
                             </div> 
                          @else

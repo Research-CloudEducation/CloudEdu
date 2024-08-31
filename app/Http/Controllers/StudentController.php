@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Content;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +33,16 @@ class StudentController extends Controller
     {
         //
     }
+    public function profile()
+    {
+        $student = Auth::guard('student')->user();
+        // $student = Student::find($student1->id);
+        $comments = Comment::where('student_id' , $student->id)->get();
+        // dd($comment);
+        $contents = Content::all();
 
+        return view('sessions.student-profile' , compact('comments' , 'contents'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -45,7 +56,7 @@ class StudentController extends Controller
                     'email' => trans('auth.failed'),
                 ]);
             }
-            return redirect()->route('studentProfile');
+            return redirect()->route('students.profile');
     }
     public function store(Request $request)
     {

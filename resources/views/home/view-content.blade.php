@@ -69,7 +69,7 @@
                                             </div>
                                     </form>
                                 </div>
-                            @elseif (Auth::guard('student')->check())
+                            @elseif (Auth::guard('student')->check() && Auth::guard('student')->user()->aprrove = 1 )
                                 <div class="card-body">
                                     @if(session('success'))
                                         <div class="alert alert-success alert-dismissible">
@@ -80,7 +80,7 @@
                                         {{ session('error') }}
                                     </div>
                                     @endif
-                                    <div class="card-title mb-3">  اترك تعليق </div>
+                                    <div class="card-title mb-3 float-right">  اترك تعليق </div>
                                     <form action="{{ route('comments.store') }}" method="POST" enctype="multipart/form-data" >
                                         @csrf
                                             <input type="hidden" name="id" value="{{ Auth::guard('student')->check() ?? Auth::guard('student')->user()->id  }}">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\School\RequestUpdate;
 use App\Http\Requests\School\SchoolRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolController extends Controller
 {
@@ -22,9 +23,16 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        // this will take you  to default page of school contain info about it 
+        if (Auth::guard('teacher')->check()) {
+            // this will take you  to default page of school contain info about it 
+           $teacher =  Auth::guard('teacher')->user();
+        $school = School::where(['id' => $teacher->school_id ]);
+        return view('admin.schools.index' , compact('school'));
+        }else{
+            // this will take you  to default page of school contain info about it 
         $schools = School::all();
         return view('admin.schools.index' , compact('schools'));
+        }
     }
 
     /**
