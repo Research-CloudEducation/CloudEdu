@@ -55,6 +55,11 @@
                                         <a class="btn btn-danger" href="{{ route('admin.students.destroy' , $student->id) }}">
                                           <i class="fa fa-trash"></i>
                                         </a>
+                                        @if ($student->approve == 0)
+                                        <a class="btn btn-info" href="{{ route('admin.students.approve' , $student->id) }}">
+                                          <i class="fa fa-check"></i>
+                                        </a>
+                                        @endif
                                       </td>
                                 </tr>
                               @endforeach

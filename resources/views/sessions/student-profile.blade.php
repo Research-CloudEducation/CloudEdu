@@ -14,19 +14,25 @@
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <div class="max-w-3xl">
                 <div class="breadcrumb">
-                    <h1>Student Profile</h1>
+                    <h1>{{ __('homepage.m-profile') }}</h1>
                     <ul>
                         <li><a href="">Pages</a></li>
-                        <li>User Profile</li>
+                        <li>student Profile</li>
                     </ul>
                 </div>
             <div class="card user-profile o-hidden mb-4">
                 <div class="header-cover" style="background-image: url({{asset('assets/images/photo-wide-5.jpeg')}}"></div>
                 <div class="user-info">
                     <img class="profile-picture avatar-lg mb-2" src="{{ Auth::guard('student')->user()->profile ? asset('upload/profile/' .Auth::guard('student')->user()->profile) : asset('assets/images/faces/1.jpg') }}" alt="">
-                    <p class="m-0 text-24">
-                        @if (Auth::guard('student')->check())
-                        {{ Auth::guard('student')->user()->name }}
+                    @if(Auth::guard('student')->check() && !Auth::guard('student')->user()->approve )
+                    <p class="alert alert-danger text-sm-center">{{ __(' لم يتم موافق على نشاط حسابك بعد يستم الموافق   عليه حين الراجعة من قبل الوكيل ') }}</p>
+                        <p class="m-0 text-24">
+                            {{ Auth::guard('student')->user()->name }}
+                        </p>
+                        @elseif (Auth::guard('student')->check())
+                        <p class="m-0 text-24">
+                            {{ Auth::guard('student')->user()->name }}
+                        </p>
                             
                         @endif
                         
@@ -39,13 +45,13 @@
                             {{-- <a class="nav-link " id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="false">Timeline</a> --}}
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+                            <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">{{ __('المعلومات الشخصية') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="homework-tab" data-toggle="tab" href="#homework" role="tab" aria-controls="homework" aria-selected="false">{{ __('الواجبات') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">Friends</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos" aria-selected="false">Photos</a>
                         </li>
                     </ul>
 
@@ -163,9 +169,9 @@
                             </ul>
                         </div>
                         <div class="tab-pane fade active show" id="about" role="tabpanel" aria-labelledby="about-tab">
-                            <h4>Personal Information</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, commodi quam! Provident quis voluptate asperiores ullam, quidem odio pariatur. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem, nulla eos?
-                                Cum non ex voluptate corporis id asperiores doloribus dignissimos blanditiis iusto qui repellendus deleniti aliquam, vel quae eligendi explicabo.
+                            <h4>{{ __('المعلومات الشخصية') }} </h4>
+                            <p>
+                                علان الضغوط و تعد, إنطلاق بريطانيا أم بين. بين بلاده العظمى ولكسمبورغ من. من الا لدحر أحدث, و أساسي وانهاء السيطرة بعد, كلا هو ووصف علاقة. دأبوا لفرنسا اسبوعين بـ إيو, ولم أحدث شواطيء لم. ضرب ٣٠ بداية فشكّل ويكيبيديا, و لها الأثنان استرجاع, عن مدن معارضة وانتهاءً. ما مسارح بريطانيا-فرنسا فصل. وسفن تصرّف إحتار أم تعد, لم بينما وبغطاء بال, دنو تم سقطت وإعلان.
                             </p>
                             <hr>
                             <div class="row">
@@ -213,34 +219,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <h4>Other Info</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolore labore reiciendis ab quo ducimus reprehenderit natus debitis, provident ad iure sed aut animi dolor incidunt voluptatem. Blanditiis, nobis aut.</p>
-                            <div class="row">
-                                <div class="col-md-2 col-sm-4 col-6 text-center">
-                                    <i class="i-Plane text-32 text-primary"></i>
-                                    <p class="text-16 mt-1">Travelling</p>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-6 text-center">
-                                    <i class="i-Camera text-32 text-primary"></i>
-                                    <p class="text-16 mt-1">Photography</p>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-6 text-center">
-                                    <i class="i-Car-3 text-32 text-primary"></i>
-                                    <p class="text-16 mt-1">Driving</p>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-6 text-center">
-                                    <i class="i-Gamepad-2 text-32 text-primary"></i>
-                                    <p class="text-16 mt-1">Gaming</p>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-6 text-center">
-                                    <i class="i-Music-Note-2 text-32 text-primary"></i>
-                                    <p class="text-16 mt-1">Music</p>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-6 text-center">
-                                    <i class="i-Shopping-Bag text-32 text-primary"></i>
-                                    <p class="text-16 mt-1">Shopping</p>
-                                </div>
-                            </div>
+                           
                         </div>
 
                         <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
@@ -351,83 +330,143 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card text-white o-hidden mb-3">
-                                        <img class="card-img" src="{{asset('assets/images/products/headphone-1.jpg')}}" alt="">
-                                        <div class="card-img-overlay">
-                                            <div class="p-1 text-start card-footer font-weight-light d-flex">
-                                                <span class="me-3 d-flex align-items-center"><i class="i-Speach-Bubble-6 me-1"></i>
-                                                    12 </span>
-                                                <span class="d-flex align-items-center"><i class="i-Calendar-4 me-2"></i>03.12.2018</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="card text-white o-hidden mb-3">
-                                        <img class="card-img" src="{{asset('assets/images/products/headphone-2.jpg')}}" alt="">
-                                        <div class="card-img-overlay">
-                                            <div class="p-1 text-start card-footer font-weight-light d-flex">
-                                                <span class="me-3 d-flex align-items-center"><i class="i-Speach-Bubble-6 me-1"></i>
-                                                    12 </span>
-                                                <span class="d-flex align-items-center"><i class="i-Calendar-4 me-2"></i>03.12.2018</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="card text-white o-hidden mb-3">
-                                        <img class="card-img" src="{{asset('assets/images/products/headphone-3.jpg')}}" alt="">
-                                        <div class="card-img-overlay">
-                                            <div class="p-1 text-start card-footer font-weight-light d-flex">
-                                                <span class="me-3 d-flex align-items-center"><i class="i-Speach-Bubble-6 me-1"></i>
-                                                    12 </span>
-                                                <span class="d-flex align-items-center"><i class="i-Calendar-4 me-2"></i>03.12.2018</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card text-white o-hidden mb-3">
-                                        <img class="card-img" src="{{asset('assets/images/products/iphone-1.jpg')}}" alt="">
-                                        <div class="card-img-overlay">
-                                            <div class="p-1 text-start card-footer font-weight-light d-flex">
-                                                <span class="me-3 d-flex align-items-center"><i class="i-Speach-Bubble-6 me-1"></i>
-                                                    12 </span>
-                                                <span class="d-flex align-items-center"><i class="i-Calendar-4 me-2"></i>03.12.2018</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card text-white o-hidden mb-3">
-                                        <img class="card-img" src="{{asset('assets/images/products/iphone-2.jpg')}}" alt="">
-                                        <div class="card-img-overlay">
-                                            <div class="p-1 text-start card-footer font-weight-light d-flex">
-                                                <span class="me-3 d-flex align-items-center"><i class="i-Speach-Bubble-6 me-1"></i>
-                                                    12 </span>
-                                                <span class="d-flex align-items-center"><i class="i-Calendar-4 me-2"></i>03.12.2018</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card text-white o-hidden mb-3">
-                                        <img class="card-img" src="{{asset('assets/images/products/watch-1.jpg')}}" alt="">
-                                        <div class="card-img-overlay">
-                                            <div class="p-1 text-start card-footer font-weight-light d-flex">
-                                                <span class="me-3 d-flex align-items-center"><i class="i-Speach-Bubble-6 me-1"></i>
-                                                    12 </span>
-                                                <span class="d-flex align-items-center"><i class="i-Calendar-4 me-2"></i>03.12.2018</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="tab-pane fade" id="homework" role="tabpanel" aria-labelledby="homework-tab">
+                            <!-- TO DO List -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    <h3 class="">
+                        <i class="ion ion-clipboard mr-1"></i>
+                        {{ __('قائمــة الواجبــات ') }}
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <ul class="todo-list" data-widget="todo-list">
+                       @foreach ($comments as $comment)
+                       <li>
+                        <!-- drag handle -->
+                        <span class="handle">
+                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </span>
+                        <!-- checkbox -->
+                        <div class="icheck-primary d-inline ml-2">
+                            <input type="checkbox" value="" name="todo1" checked id="todoCheck1">
+                            <label for="todoCheck1"></label>
+                        </div>
+                        <!-- todo text -->
+                        <span class="text">{{ $comment->content->title }}  : {{ __('في مادة') }} :-> {{ $comment->content->category->name }}</span>
+                        <!-- Emphasis label -->
+                        <small class="badge badge-info"><i class="far fa-clock"></i> {{ $comment->content->created_at->toFormattedDateString() }}</small>
+                        <!-- General tools such as edit or delete-->
+                        <div class="tools">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash-o"></i>
+                        </div>
+                    </li>
+                       @endforeach
+                        {{-- <li>
+                            <span class="handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
+                                <label for="todoCheck2"></label>
                             </div>
+                            <span class="text">Make the theme responsive</span>
+                            <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                            <div class="tools">
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-trash-o"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="todo3" id="todoCheck3">
+                                <label for="todoCheck3"></label>
+                            </div>
+                            <span class="text">Let theme shine like a star</span>
+                            <small class="badge badge-warning"><i class="far fa-clock"></i> 1
+                                day</small>
+                            <div class="tools">
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-trash-o"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="todo4" id="todoCheck4">
+                                <label for="todoCheck4"></label>
+                            </div>
+                            <span class="text">Let theme shine like a star</span>
+                            <small class="badge badge-success"><i class="far fa-clock"></i> 3
+                                days</small>
+                            <div class="tools">
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-trash-o"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="todo5" id="todoCheck5">
+                                <label for="todoCheck5"></label>
+                            </div>
+                            <span class="text">Check your messages and notifications</span>
+                            <small class="badge badge-primary"><i class="far fa-clock"></i> 1
+                                week</small>
+                            <div class="tools">
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-trash-o"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <div class="icheck-primary d-inline ml-2">
+                                <input type="checkbox" value="" name="todo6" id="todoCheck6">
+                                <label for="todoCheck6"></label>
+                            </div>
+                            <span class="text">Let theme shine like a star</span>
+                            <small class="badge badge-secondary"><i class="far fa-clock"></i> 1
+                                month</small>
+                            <div class="tools">
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-trash-o"></i>
+                            </div>
+                        </li> --}}
+                    </ul>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                    <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i>
+                        Add item</button>
+                </div>
+            </div>
+            <!-- /.card -->
                         </div>
                     </div>
                 </div>

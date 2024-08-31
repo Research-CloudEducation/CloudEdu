@@ -12,7 +12,7 @@ class Comment extends Model
     protected $guarded = [];
     public function content() : BelongsTo
     {
-        return $this->belongsTo(Content::class);
+        return $this->belongsTo(Content::class , 'content_id');
     }
     public function student() : BelongsTo
     {

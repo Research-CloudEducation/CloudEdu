@@ -65,6 +65,7 @@ Route::group(
         // manage student side homepage routes
         Route::resource('/students' , ControllersStudentController::class);
         Route::post('/SignIn-student', [ControllersStudentController::class,'signIn'])->name('students.signIn');
+        Route::get('/student/profile', [ControllersStudentController::class,'profile'])->name('students.profile');
         Route::get('/students', [ControllersStudentController::class , 'logout'])->name('students.signOut');
         // manage teacher side homepage route
         Route::resource('/teachers' , ControllersTeacherController::class);
@@ -131,6 +132,7 @@ Route::group(
             Route::resource('/students' , StudentController::class)->except('destroy');
 
             Route::get('students/{id}/destroy' , [StudentController::class , 'destroy'])->name('students.destroy');
+            Route::get('students/{id}/approve' , [StudentController::class , 'approve'])->name('students.approve');
         });
 
         // manage routes of agents of schools 

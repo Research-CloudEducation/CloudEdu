@@ -14,7 +14,7 @@ class Category extends Model
     // create relationship between class category
     public function classLevels() : HasMany
     {
-        return $this->hasMany(ClassLevel::class);
+        return $this->hasMany(ClassLevel::class , 'class_id');
     }
     public function categories() : HasMany
     {

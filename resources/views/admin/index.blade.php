@@ -15,12 +15,12 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{ $students->count() }}</h3>
 
-                    <p>all Student</p>
+                    <p>{{ __('home.students') }}</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="ion ion-person-add"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i
                         class="fas fa-arrow-circle-right"></i></a>
@@ -31,14 +31,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{ $teachers->count() }}<sup style="font-size: 20px"></sup></h3>
 
-                    <p>all School</p>
+                    <p>{{ __('sidebar.schools') }}</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i
+                <a href="{{ route('admin.schools.index') }}" class="small-box-footer">More info <i
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
@@ -47,14 +47,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>44</h3>
+                    <h3>{{ $teachers->count() }}</h3>
 
-                    <p>all Teacher</p>
+                    <p>{{ __('home.teachers') }}</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i
+                <a href="{{ route('admin.teachers.index') }}" class="small-box-footer">More info <i
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>

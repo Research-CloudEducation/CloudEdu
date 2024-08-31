@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('page_sub_title' , ' إنشاء مستخدم جديد')
+@section('page_sub_title' , ' إنشاء مستخدم جديد (وكيل )')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="#">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Link 1</a></li>

@@ -50,7 +50,7 @@
                  {{-- <link rel="stylesheet" href="{{ asset('dashboard/dist/css/custom.css') }}"> --}}
                  <link href="{{ asset('home/lib/animate/animate.min.css') }}" rel="stylesheet">
                  <link href="{{ asset('home/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-        @endif
+                 <link rel="stylesheet" href="{{ asset('dashboard/dist/css/adminlte.min.css') }}">        @endif
          <!-- Scripts -->
          <link id="gull-theme" rel="stylesheet" href="{{ asset('assets\fonts\iconsmind\iconsmind.css') }}">
          <link id="gull-theme" rel="stylesheet" href="{{ asset('assets/styles/css/themes/lite-purple.min.css') }}">
@@ -161,11 +161,12 @@
             <div class="container ">
                 <div class="copyright">
                     <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+                        <div class="col-md-6 text-center text-md-start ">
+                            Designed By <a class="border-bottom" href="/">My Team</a>
+                            &copy; <a class="border-bottom" href="#">{{ __('homepage.teach-me') }}</a>, All Right Reserved.
         
                             <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
