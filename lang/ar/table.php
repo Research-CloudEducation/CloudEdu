@@ -22,6 +22,10 @@ return [
     'confirmpassword' => 'تأكيد كلمة السر ',
     'school' => 'المدرسة',
     'classLevel' => ' الفصل الدراسي ',
+    'file-name' => 'إسم الملف',
+    'category-name' => 'اسم المادة',
+    'upload-by' => 'تم رفم بواسطة الاستاذ',
+    'create-date' => 'التاريخ',
 ];
 
 

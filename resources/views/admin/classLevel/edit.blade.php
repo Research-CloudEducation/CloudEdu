@@ -20,7 +20,7 @@
                     </div>
                 @endif
                 <section>
-                    <form method="post" action="{{ route('admin.class-level.update' , $class->id) }}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ route('admin.class-level.update' , $classLevel->id) }}" class="mt-6 space-y-6">
                         @csrf
                         @method('patch')
                         @if(session('status'))
@@ -30,23 +30,23 @@
                         @endif
                         <div>
                             <x-input-label for="ar_name" :value=" trans('form.name_ar') " />
-                            <x-text-input id="name" name="name_ar" type="text" class="mt-1 block w-full" :value=" $class->name "  autofocus autocomplete="name" />
+                            <x-text-input id="name" name="name_ar" type="text" class="mt-1 block w-full" :value=" $classLevel->name "  autofocus autocomplete="name" />
                             <x-input-error class="mt-2" :messages="$errors->get('name_ar')" />
                         </div>
                 
                         <div>
                             <x-input-label for="en_name" :value="trans('form.name_en') " />
-                            <x-text-input id="name" name="name_en" type="text" class="mt-1 block w-full" :value="$class->attrByLocale('en' , 'name')"  autofocus autocomplete="name" />
+                            <x-text-input id="name" name="name_en" type="text" class="mt-1 block w-full" :value="$classLevel->attrByLocale('en' , 'name')"  autofocus autocomplete="name" />
                             <x-input-error class="mt-2" :messages="$errors->get('name_en')" />
                         </div>
                         <div>
                             <x-input-label for="description_ar" :value="trans('form.desc_ar') " />
-                            <x-text-input id="text" name="description_ar" type="text" class="mt-1 block w-full" :value="$class->description"  autocomplete="description_ar" />
+                            <x-text-input id="text" name="description_ar" type="text" class="mt-1 block w-full" :value="$classLevel->description"  autocomplete="description_ar" />
                             <x-input-error class="mt-2" :messages="$errors->get('description_ar')" />
                         </div>
                         <div>
                             <x-input-label for="description_en" :value="trans('form.desc_en') " />
-                            <x-text-input id="text" name="description_en" type="text" class="mt-1 block w-full" :value="$class->attrByLocale('en' , 'description')" autocomplete="description_en" />
+                            <x-text-input id="text" name="description_en" type="text" class="mt-1 block w-full" :value="$classLevel->attrByLocale('en' , 'description')" autocomplete="description_en" />
                             <x-input-error class="mt-2" :messages="$errors->get('description_en')" />
                         </div>
                     

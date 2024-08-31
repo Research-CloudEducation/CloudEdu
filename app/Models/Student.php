@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\Contracts\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable 
 {
-    use HasFactory;
+    use  HasFactory, Notifiable , HasRoles;
     protected $guarded = [];
 
     // create relationship between student and school
@@ -24,6 +28,11 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(ClassLevel::class , 'class_id');
     }
+    public function comments() : HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+   
     public function attrByLocale($locale = 'ar' , $attr = 'name')
     {
         $arr = json_decode($this->getRawOriginal($attr) , true);

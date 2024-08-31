@@ -18,9 +18,9 @@ class School extends Model
      }
      // make relation between agent and school 
 
-     public function agents() : HasMany
+     public function users() : HasMany
      {
-        return $this->hasMany(Agent::class);
+        return $this->hasMany(User::class);
      }
      // make relationship between school and student 
      

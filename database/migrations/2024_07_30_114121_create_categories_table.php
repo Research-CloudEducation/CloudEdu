@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->json('description');
+            $table->text('file')->default('1724741256_Screenshot from 2024-07-08 18-53-15.png');
+            $table->unsignedBigInteger('class_id');
+            $table->foreign('class_id')->references('id')->on('class_levels')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

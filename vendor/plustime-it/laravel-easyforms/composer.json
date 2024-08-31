@@ -1,0 +1,57 @@
+{
+  "name": "plustime-it/laravel-easyforms",
+  "description": "Laravel EasyForms",
+  "license": "MIT",
+  "type": "library",
+  "version": "0.2.28",
+  "authors": [
+    {
+      "name": "Kane G",
+      "email": "kane@plustime.com.au"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "laravel/framework": "^10.0"
+  },
+  "require-dev": {
+    "brianium/paratest": "^7.3",
+    "ergebnis/composer-normalize": "^2.39",
+    "icanhazstring/composer-unused": "^0.8.10",
+    "laravel/pint": "^1.13",
+    "nunomaduro/collision": "^7.10",
+    "orchestra/testbench": "^8.18.0"
+  },
+  "minimum-stability": "beta",
+  "autoload": {
+    "psr-4": {
+      "PlusTimeIT\\EasyForms\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PlusTimeIT\\EasyForms\\Tests\\": "tests"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "aliases": {
+        "EasyForms": "PlusTimeIT\\EasyForms"
+      },
+      "providers": [
+        "PlusTimeIT\\EasyForms\\Providers\\EasyForms"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "./.scripts/build.sh --non-interactive",
+    "format": "pint --config ./pint.json",
+    "test": "vendor/bin/testbench package:test --parallel",
+    "trim:packages": "vendor/bin/composer-unused"
+  }
+}
