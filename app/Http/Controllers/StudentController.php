@@ -41,7 +41,7 @@ class StudentController extends Controller
         // dd($comment);
         $contents = Content::all();
 
-        return view('sessions.student-profile' , compact('comments' , 'contents'));
+        return view('sessions.student-profile' , compact('comments' , 'contents' , 'student'));
     }
     /**
      * Store a newly created resource in storage.
