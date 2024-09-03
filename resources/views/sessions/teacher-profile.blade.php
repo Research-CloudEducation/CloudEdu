@@ -37,13 +37,17 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs profile-nav mb-4" id="profileTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link " id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="true">{{ trans('homepage.home-work') }}</a>
+                            @if (Auth::guard('teacher')->check())
+                                 <a class="nav-link " id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="true">{{ trans('homepage.home-work') }}</a>
+                            @endif
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="true">Friends</a>
+                            @if (Auth::guard('teacher')->check())
+                            <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="true">{{ Auth::guard('teacher')->check() ? __('تعديل المعلومات') : '' }}</a>
+                            @endif
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos" aria-selected="false">Photos</a>
@@ -232,113 +236,90 @@
                             </div> --}}
                         </div>
 
-                        <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="card card-profile-1 mb-4">
-                                        <div class="card-body text-center">
-                                            <div class="avatar box-shadow-2 mb-3">
-                                                <img src="{{asset('assets/images/faces/16.jpg')}}" alt="">
-                                            </div>
-                                            <h5 class="m-0">Jassica Hike</h5>
-                                            <p class="mt-0">UI/UX Designer</p>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque.
-                                            </p>
-                                            <button class="btn btn-primary btn-rounded">Contact Jassica</button>
-                                            <div class="card-socials-simple mt-4">
-                                                <a href="">
-                                                    <i class="i-Linkedin-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Facebook-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Twitter"></i>
-                                                </a>
-                                            </div>
+                        <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
+                            <div class="py-12">
+                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                                    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                                        <div class="max-w-3xl">
+                                            <section>
+                                                <form method="post" action="{{ route('admin.teachers.update' , Auth::guard('teacher')->user()->id) }}" class="mt-6 space-y-6">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    @if(session('success'))
+                                                        <div class="alert alert-success">
+                                                            {{ session('success') }}
+                                                        </div>
+                                                    @elseif (session('error'))
+                                                        <div class="alert alert-danger">
+                                                            {{ session('error') }}
+                                                        </div>
+                                                    @endif
+                               
+                                                      <div class="row">
+                                                        <div class="col">
+                                                            <div >
+                                                                <x-input-label for="name_ar" :value=" trans('form.name_ar') " />
+                                                                <x-text-input id="name" name="name_ar" type="text" class="mt-1 block w-full" :value="$teacher->name"  autofocus autocomplete="name" />
+                                                                <x-input-error class="mt-2" :messages="$errors->get('name_ar')" />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col">
+                                                            <div>
+                                                                <x-input-label for="name_en" :value="trans('form.name_en')  "  /> 
+                                                                <x-text-input id="name" name="name_en" type="text" class="mt-1 block w-full" :value="$teacher->attrByLocale('en' , 'name')"  autofocus autocomplete="name" />
+                                                                <x-input-error class="mt-2" :messages="$errors->get('name_en')" />
+                                                            </div>
+                                                        </div>
+                                                            
+                                                      </div>
+                              
+                                                    <div>
+                                                        <x-input-label for="email" :value="trans('form.email') " />
+                                                        <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="$teacher->email"  autocomplete="email" />
+                                                        <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                                                    </div>
+                                                    <div>
+                                                        <x-input-label for="password" :value="trans('form.password') " />
+                                                        <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" :value="$teacher->password" autocomplete="new-password" />
+                                                        <x-input-error class="mt-2" :messages="$errors->get('password')" />
+                                                    </div>
+                                                    <div>
+                                                        <x-input-label for="password" :value="trans('form.confirmpassword') " />
+                                                        <x-text-input id="password" name="password_confirmation" type="password" class="mt-1 block w-full" :value="$teacher->password" autocomplete="new-password" />
+                                                        <x-input-error class="mt-2" :messages="$errors->get('password')" />
+                                                    </div>
+                                                    <div>
+                                                        <x-input-label for="description_en" :value="trans('form.phone') " />
+                                                        <x-text-input id="text" name="phone" type="text" class="mt-1 block w-full" :value="$teacher->phone" autocomplete="phone" />
+                                                        <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+                                                    </div>
+                                                    <div>
+                                                        <x-input-label for="address" :value="trans('form.address') " />
+                                                        <x-text-input id="text" name="address" type="text" class="mt-1 block w-full" :value="$teacher->address"  autocomplete="address" />
+                                                        <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                                                    </div>
+                                                    <div>
+                                                        <x-input-label for="description_en" :value="trans('form.FromSchool') " />
+                                                        <select name="school_id" id="" class="custom-select custom-select-lg mb-3">
+                                                            <option selected></option>
+                                                            @foreach ($schools as $school)
+                                                                <option value="{{ $school->id }}" {{ $school->id == $teacher->school_id ? 'selected' : ''}}>{{ $school->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <x-input-error class="mt-2" :messages="$errors->get('school_id')" />
+                                                    </div>
+                                                    <div class="flex items-center gap-4">
+                                                        <x-primary-button>{{ trans('form.edit') }}</x-primary-button>
+                                            
+                                                    
+                                                    </div>
+                                                </form>
+                                            </section>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-3">
-                                    <div class="card card-profile-1 mb-4">
-                                        <div class="card-body text-center">
-                                            <div class="avatar box-shadow-2 mb-3">
-                                                <img src="{{asset('assets/images/faces/2.jpg')}}" alt="">
-                                            </div>
-                                            <h5 class="m-0">Frank Powell</h5>
-                                            <p class="mt-0">UI/UX Designer</p>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque.
-                                            </p>
-                                            <button class="btn btn-primary btn-rounded">Contact Frank</button>
-                                            <div class="card-socials-simple mt-4">
-                                                <a href="">
-                                                    <i class="i-Linkedin-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Facebook-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Twitter"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="card card-profile-1 mb-4">
-                                        <div class="card-body text-center">
-                                            <div class="avatar box-shadow-2 mb-3">
-                                                <img src="{{asset('assets/images/faces/3.jpg')}}" alt="">
-                                            </div>
-                                            <h5 class="m-0">Arthur Mendoza</h5>
-                                            <p class="mt-0">UI/UX Designer</p>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque.
-                                            </p>
-                                            <button class="btn btn-primary btn-rounded">Contact Arthur</button>
-                                            <div class="card-socials-simple mt-4">
-                                                <a href="">
-                                                    <i class="i-Linkedin-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Facebook-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Twitter"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="card card-profile-1 mb-4">
-                                        <div class="card-body text-center">
-                                            <div class="avatar box-shadow-2 mb-3">
-                                                <img src="{{asset('assets/images/faces/4.jpg')}}" alt="">
-                                            </div>
-                                            <h5 class="m-0">Jacqueline Day</h5>
-                                            <p class="mt-0">UI/UX Designer</p>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque.
-                                            </p>
-                                            <button class="btn btn-primary btn-rounded">Contact Jacqueline</button>
-                                            <div class="card-socials-simple mt-4">
-                                                <a href="">
-                                                    <i class="i-Linkedin-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Facebook-2"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="i-Twitter"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                             </div>
                         </div>
                         <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
                             <div class="row">
