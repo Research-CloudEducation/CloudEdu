@@ -1,7 +1,7 @@
 <?php
 
 namespace Illuminate\Contracts\Auth;
-use App\Models\Agent;
+
 interface Authenticatable
 {
     /**
@@ -17,6 +17,13 @@ interface Authenticatable
      * @return mixed
      */
     public function getAuthIdentifier();
+
+    /**
+     * Get the name of the password attribute for the user.
+     *
+     * @return string
+     */
+    public function getAuthPasswordName();
 
     /**
      * Get the password for the user.

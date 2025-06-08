@@ -1,6 +1,0 @@
-vendor
-.phpdoc
-.phpunit.*
-phpunit.xml.bak
-*.cache
-*.idea
